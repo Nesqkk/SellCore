@@ -24,8 +24,16 @@ export const productTable = pgTable('products', {
   description: text('descricao').notNull(),
   specification: text('especificacao').notNull(),
   image: varchar('imagem', { length: 255 }),
-  cost_price: decimal('preco_custo', { precision: 10, scale: 2 }).notNull(),
-  selling_price: decimal('preco_venda', { precision: 10, scale: 2 }).notNull(),
+  cost_price: decimal('preco_custo', {
+    precision: 10,
+    scale: 2,
+    mode: 'number',
+  }).notNull(),
+  selling_price: decimal('preco_venda', {
+    precision: 10,
+    scale: 2,
+    mode: 'number',
+  }).notNull(),
   physical_inventory: integer('estoque_fisico').default(0).notNull(),
   reserved_inventory: integer('estoque_reservado').default(0).notNull(),
   separate_inventory: integer('estoque_separado').default(0).notNull(),
