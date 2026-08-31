@@ -4,23 +4,23 @@ import {
   IsNotEmpty,
   IsOptional,
   Length,
-  MaxLength,
+  Min,
 } from 'class-validator';
 
 export class CreateProductDTO {
   @IsString()
-  @Length(7, 7, { message: 'O código deve ter 7 números ' })
+  @Length(7, 7)
   @IsNotEmpty({ message: 'Código do produto não pode ser vazio' })
   code!: string;
 
   @IsString()
   @IsNotEmpty({ message: 'Nome não pode ser vazio' })
-  @MaxLength(100, { message: 'Você passou o máximo de caracteres' })
+  @IsNotEmpty({ message: 'Você passou o máximo de caracteres' })
   name!: string;
 
   @IsString()
+  @Length(13, 13)
   @IsNotEmpty()
-  @Length(13, 13, { message: 'O EAN do produto deve ter 13 números ' })
   ean!: string;
 
   @IsString()
@@ -48,20 +48,26 @@ export class CreateProductDTO {
   image?: string;
 
   @IsNumber()
+  @Min(0)
   cost_price!: number;
 
   @IsNumber()
+  @Min(0)
   selling_price!: number;
 
   @IsNumber()
+  @Min(0)
   physical_inventory!: number;
 
   @IsNumber()
+  @Min(0)
   reserved_inventory!: number;
 
   @IsNumber()
+  @Min(0)
   separate_inventory!: number;
 
   @IsNumber()
+  @Min(0)
   available_inventory!: number;
 }
