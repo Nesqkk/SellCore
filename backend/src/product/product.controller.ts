@@ -15,7 +15,7 @@ import { CreateProductDTO } from './dtos/create.product';
 import { UpdateProductDTO } from './dtos/update.product';
 import { ProductResponse } from './constants/product.response';
 
-@Controller('/api/v1/product')
+@Controller('api/v1/product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
@@ -47,28 +47,18 @@ export class ProductController {
     return product;
   }
 
-  @Put()
+  @Put(':code')
   @HttpCode(HttpStatus.OK)
   async update(
     @Param('code') code: string,
     @Body() productDto: UpdateProductDTO,
   ) {
-    const updateProduct = await this.productService.update(code, productDto);
-
-    return {
-      ...ProductResponse.UPDATE,
-      data: updateProduct,
-    };
+    return this.productService.update(code, productDto);
   }
 
-  @Delete()
+  @Delete(':code')
   @HttpCode(HttpStatus.OK)
   async delete(@Param('code') code: string) {
-    const deleteProduct = await this.productService.delete(code);
-
-    return {
-      ...ProductResponse.DELETE,
-      data: deleteProduct,
-    };
+    return this.productService.delete(code);
   }
 }

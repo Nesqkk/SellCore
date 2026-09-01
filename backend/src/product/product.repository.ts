@@ -18,17 +18,10 @@ export class ProductRepository {
   }
 
   async update(code: string, data: Partial<typeof productTable.$inferInsert>) {
-    return db
-      .update(productTable)
-      .set(data)
-      .where(eq(productTable.code, code))
-      .returning();
+    return db.update(productTable).set(data).where(eq(productTable.code, code));
   }
 
   async delete(code: string) {
-    return db
-      .delete(productTable)
-      .where(eq(productTable.code, code))
-      .returning();
+    return db.delete(productTable).where(eq(productTable.code, code));
   }
 }
