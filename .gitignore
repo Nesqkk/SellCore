@@ -34,3 +34,4 @@ venv/
 # Outros
 tmp/
 temp/
+.aider*
