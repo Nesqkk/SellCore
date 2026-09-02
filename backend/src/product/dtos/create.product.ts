@@ -8,17 +8,28 @@ import {
   MaxLength,
 } from 'class-validator';
 
+/**
+ * CreateProductDTO — Objeto de Transferência de Dados para criação de produto.
+ *
+ * DTO (Data Transfer Object) é um objeto que define a "forma" dos dados
+ * esperados em uma requisição. O `class-validator` usa os decorators (@IsString,
+ * @IsNotEmpty etc.) para validar automaticamente cada campo antes de chegar
+ * ao Service. Se a validação falhar, o NestJS retorna um erro 400 Bad Request.
+ */
 export class CreateProductDTO {
+  // Código interno único do produto - exatamente 7 caracteres
   @IsString()
   @Length(7, 7, { message: 'Código deve ter 7 números' })
   @IsNotEmpty({ message: 'Código do produto não pode ser vazio' })
   code!: string;
 
+  // Nome do produto - entre 1 e 100 caracteres
   @IsString()
   @IsNotEmpty({ message: 'Nome não pode ser vazio' })
   @Length(1, 100, { message: 'Nome deve ter entre 1 e 100 caracteres' })
   name!: string;
 
+  // Código de barras EAN-13 - exatamente 13 dígitos
   @IsString()
   @Length(13, 13, { message: 'EAN deve conter 13 números' })
   @IsNotEmpty()
@@ -47,6 +58,7 @@ export class CreateProductDTO {
   @IsNotEmpty({ message: 'Preencha o campo especificação' })
   specification!: string;
 
+  // URL da imagem é opcional (@IsOptional ignora a validação se o campo não for enviado)
   @IsOptional()
   @IsString()
   @MaxLength(255, {
@@ -54,6 +66,7 @@ export class CreateProductDTO {
   })
   image?: string;
 
+  // Preços não podem ser negativos (@Min(0))
   @IsNumber()
   @Min(0)
   cost_price!: number;
@@ -62,6 +75,7 @@ export class CreateProductDTO {
   @Min(0)
   selling_price!: number;
 
+  // Campos de estoque são opcionais na criação (padrão é 0 definido no schema)
   @IsOptional()
   @IsNumber()
   @Min(0)
