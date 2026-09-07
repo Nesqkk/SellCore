@@ -1,0 +1,21 @@
+CREATE TABLE "customers" (
+	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "customers_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"cpf" varchar(11) NOT NULL,
+	"nome" varchar(100) NOT NULL,
+	"data_nascimento" date NOT NULL,
+	"email" varchar(100) NOT NULL,
+	"telefone" varchar(11) NOT NULL,
+	"cep" varchar(8) NOT NULL,
+	"rua" varchar(100) NOT NULL,
+	"numero" varchar(10) NOT NULL,
+	"quadra" varchar(10) NOT NULL,
+	"lote" varchar(10) NOT NULL,
+	"complemento" varchar(50),
+	"bairro" varchar(50) NOT NULL,
+	"cidade" varchar(50) NOT NULL,
+	"estado" varchar(2) NOT NULL,
+	"criado_em" date DEFAULT now() NOT NULL,
+	"atualizado_em" date DEFAULT now() NOT NULL,
+	CONSTRAINT "customers_cpf_unique" UNIQUE("cpf"),
+	CONSTRAINT "customers_email_unique" UNIQUE("email")
+);
