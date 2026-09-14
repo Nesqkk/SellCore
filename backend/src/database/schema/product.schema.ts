@@ -15,9 +15,9 @@ import {
  * O Drizzle cria/sincroniza esse tipo no banco com o nome 'inventory_status'.
  */
 export const inventoryStatus = pgEnum('inventory_status', [
-  'disponivel',    // Produto com estoque suficiente
+  'disponivel', // Produto com estoque suficiente
   'estoque_baixo', // Produto com pouco estoque
-  'indisponivel',  // Produto sem estoque
+  'indisponivel', // Produto sem estoque
 ]);
 
 /**
@@ -65,10 +65,10 @@ export const productTable = pgTable('products', {
   }).notNull(),
 
   // Controle de estoque separado em três camadas:
-  physical_inventory: integer('estoque_fisico').default(0).notNull(),   // Quantidade física total no depósito
+  physical_inventory: integer('estoque_fisico').default(0).notNull(), // Quantidade física total no depósito
   reserved_inventory: integer('estoque_reservado').default(0).notNull(), // Quantidade reservada para pedidos
-  separate_inventory: integer('estoque_separado').default(0).notNull(),  // Quantidade já separada para entrega
-  available_inventory: integer('estoque_disponivel').default(0),         // Quantidade disponível para venda
+  separate_inventory: integer('estoque_separado').default(0).notNull(), // Quantidade já separada para entrega
+  available_inventory: integer('estoque_disponivel').default(0).notNull(), // Quantidade disponível para venda
 
   // Status calculado com base nas quantidades de estoque
   status: inventoryStatus('status').default('disponivel').notNull(),
