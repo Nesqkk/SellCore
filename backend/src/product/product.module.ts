@@ -14,8 +14,9 @@ import { ProductRepository } from './product.repository';
 @Module({
   controllers: [ProductController],
   providers: [
-    ProductService,    // Lógica de negócio
+    ProductService, // Lógica de negócio
     ProductRepository, // Acesso ao banco de dados
   ],
+  exports: [ProductService, ProductRepository],
 })
 export class ProductModule {}

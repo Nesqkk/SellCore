@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ProductModule } from './product/product.module';
 import { DatabaseModule } from './database/database.module';
 import { CustomerModule } from './customer/customer.module';
+import { SalesOrderModule } from './sales-order/sales-order.module';
 
 /**
  * AppModule — Módulo raiz da aplicação.
@@ -27,6 +28,8 @@ import { CustomerModule } from './customer/customer.module';
     DatabaseModule,
 
     CustomerModule,
+
+    SalesOrderModule,
   ],
 })
 export class AppModule {}
