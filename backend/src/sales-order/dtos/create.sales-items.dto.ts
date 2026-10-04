@@ -1,8 +1,8 @@
-import { IsString, IsNumber, Min } from 'class-validator';
+import { IsString, IsNumber, Min, IsOptional } from 'class-validator';
 
 export class CreateSalesItemsDTO {
   @IsString()
-  productId!: string;
+  productCode!: string;
 
   @IsNumber()
   @Min(1)
@@ -10,5 +10,6 @@ export class CreateSalesItemsDTO {
 
   @IsNumber()
   @Min(0)
-  discount!: number;
+  @IsOptional()
+  discount?: number;
 }

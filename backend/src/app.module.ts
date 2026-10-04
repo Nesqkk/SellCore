@@ -5,6 +5,7 @@ import { ProductModule } from './product/product.module';
 import { DatabaseModule } from './database/database.module';
 import { CustomerModule } from './customer/customer.module';
 import { SalesOrderModule } from './sales-order/sales-order.module';
+import { StockModule } from './stock/stock.module';
 
 /**
  * AppModule — Módulo raiz da aplicação.
@@ -30,6 +31,8 @@ import { SalesOrderModule } from './sales-order/sales-order.module';
     CustomerModule,
 
     SalesOrderModule,
+
+    StockModule,
   ],
 })
 export class AppModule {}

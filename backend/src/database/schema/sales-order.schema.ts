@@ -56,7 +56,5 @@ export const salesOrderTable = pgTable('sales_orders', {
   updatedAt: timestamp('atualizado_em', { withTimezone: true })
     .notNull()
     .defaultNow(),
-  cancelledAt: timestamp('cancelado_em', { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  cancelledAt: timestamp('cancelado_em', { withTimezone: true }),
 });
