@@ -11,9 +11,10 @@ import { ErrorRetrievingTheSalesOrderNumber } from './exception/error-retrieving
 import { ProductService } from '../product/product.service';
 import { CancelingSalesOrderException } from './exception/canceling-sales-order-exception';
 import { ProductNotFoundException } from '../product/exception/product-not-found.exception';
+import { InsufficientStockException } from './exception/insufficient-stock.exception';
 
 type SalesOrderItemData = {
-  productId: string;
+  productCode: string;
   quantity: number;
   unitPrice: number;
   discount: number;
@@ -45,10 +46,14 @@ export class SalesOrderService {
 
     for (const item of data.items) {
       // O findByCode retorna um array, pegamos o primeiro
-      const [product] = await this.productService.findByCode(item.productId);
+      const [product] = await this.productService.findByCode(item.productCode);
 
       if (!product) {
         throw new ProductNotFoundException();
+      }
+
+      if (item.quantity <= 0) {
+        throw new InsufficientStockException();
       }
 
       const unitPrice = product.selling_price;
@@ -60,7 +65,7 @@ export class SalesOrderService {
       totalDiscount += discount;
 
       itemsData.push({
-        productId: product.code,
+        productCode: product.code,
         quantity: item.quantity,
         unitPrice: unitPrice,
         discount: discount,
@@ -122,5 +127,11 @@ export class SalesOrderService {
     }
 
     return cancelOrder;
+  }
+
+  async findAllSalesOrders() {
+    const salesOrders = await this.salesOrderRepository.findAllSalesOrders();
+
+    return salesOrders;
   }
 }

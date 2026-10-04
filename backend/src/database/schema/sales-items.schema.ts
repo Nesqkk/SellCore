@@ -8,7 +8,7 @@ export const salesItems = pgTable('sales_items', {
   saleId: uuid('id_venda')
     .notNull()
     .references(() => salesOrderTable.id),
-  productId: varchar('id_produto')
+  productCode: varchar('id_produto')
     .notNull()
     .references(() => productTable.code),
   quantity: integer('quantidade').notNull(),

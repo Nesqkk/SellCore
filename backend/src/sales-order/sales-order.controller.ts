@@ -5,6 +5,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Get,
   HttpStatus,
   HttpCode,
 } from '@nestjs/common';
@@ -32,7 +33,7 @@ export class SalesOrderController {
   }
 
   @Patch(':pvNumber/:pvCheckDigit/cancel')
-  @HttpCode(HttpStatus.UNPROCESSABLE_ENTITY)
+  @HttpCode(HttpStatus.OK)
   async cancel(
     @Param('pvNumber', ParseIntPipe) pvNumber: number,
     @Param('pvCheckDigit', ParseIntPipe) pvCheckDigit: number,
@@ -48,5 +49,12 @@ export class SalesOrderController {
       ...SalesOrderResponse.CANCEL,
       cancelOrder,
     };
+  }
+
+  @Get()
+  async findAllSalesOrders() {
+    const salesOrders = await this.salesOrderService.findAllSalesOrders();
+
+    return salesOrders;
   }
 }
